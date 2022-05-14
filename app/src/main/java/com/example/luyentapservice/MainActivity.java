@@ -43,10 +43,12 @@ public class MainActivity extends AppCompatActivity {
     //xu ly nut start
     private void clickStartService() {
         Intent intent=new Intent(this,MyService.class);
-        //intent.putExtra("data_send",mEdtText.getText().toString().trim());
+
         Song song=new Song("Nhac","Dong Nhi",R.drawable.ic_launcher_background,R.raw.baiso01);
+        //gui intent thong qua bundle
         Bundle bundle=new Bundle();
         bundle.putSerializable("object_song",song);
+
         intent.putExtras(bundle);
         startService(intent);
     }

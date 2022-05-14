@@ -53,11 +53,14 @@ public class MyService extends Service {
     }
 
     private void sendNotification(Song song) {
+        //gan bitmap voi getImage cua song
         Bitmap bitmap=BitmapFactory.decodeResource(getResources(),song.getImage());
+
         Intent intent=new Intent(this,MainActivity.class);
         //xac dinh noi man hinh tra ve khi nhan vao notification
         PendingIntent pendingIntent=PendingIntent.getActivity(this,0,intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
+        //custom notification su dung remoteviews de gan cac doi tuong cu the tren view
         RemoteViews remoteViews=new RemoteViews(getPackageName(),R.layout.layout_custom_notification);
 
         remoteViews.setTextViewText(R.id.txtTitle,song.getTitle());
@@ -65,9 +68,8 @@ public class MyService extends Service {
         remoteViews.setImageViewBitmap(R.id.img_song,bitmap);
         remoteViews.setImageViewResource(R.id.imgPause,R.drawable.icons_stop_);
 
+        //tao notofication
         Notification notification=new NotificationCompat.Builder(this,CHANNEL_ID)
-                //.setContentTitle("Tile example")
-                //.setContentText(getData)
                 .setSmallIcon(android.R.drawable.ic_media_play)
                 .setContentIntent(pendingIntent)
                 .setCustomContentView(remoteViews)

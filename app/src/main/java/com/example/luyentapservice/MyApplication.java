@@ -19,6 +19,7 @@ public class MyApplication extends Application {
             //TAO DOI TUONG NOTIFICATION
             NotificationChannel notificationChannel=new NotificationChannel(CHANNEL_ID,"Channel Service Example", NotificationManager.IMPORTANCE_DEFAULT);
             NotificationManager notificationManager= (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            //setsound = null de khong co tieng thong bao vang len khi play nhac
             notificationChannel.setSound(null,null);
             notificationManager.createNotificationChannel(notificationChannel);
         }
