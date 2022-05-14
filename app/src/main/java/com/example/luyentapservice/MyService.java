@@ -19,6 +19,10 @@ import androidx.core.app.NotificationCompat;
 
 public class MyService extends Service {
 
+    public static final int ACTION_STOP=0;
+    public static final int ACTION_PAUSE=1;
+    public static final int ACTION_PLAY=2;
+    boolean isPlaying;
     private MediaPlayer mediaPlayer;
     @Nullable
     @Override
@@ -50,6 +54,7 @@ public class MyService extends Service {
             mediaPlayer=MediaPlayer.create(getApplicationContext(),song.getResource());
         }
         mediaPlayer.start();
+        isPlaying=true;
     }
 
     private void sendNotification(Song song) {
@@ -78,6 +83,38 @@ public class MyService extends Service {
 
         //start forceground
         startForeground(1,notification);
+    }
+
+    private void handleActionMusic(int action)
+    {
+        switch (action)
+        {
+            case ACTION_PAUSE:
+                onPauseMusic();
+                break;
+            case ACTION_STOP:
+                stopSelf();
+                break;
+            case ACTION_PLAY:
+                onPlayMusic();
+                break;
+        }
+    }
+
+    private void onPauseMusic() {
+        if(mediaPlayer!=null && isPlaying)
+        {
+            mediaPlayer.pause();
+            isPlaying=false;
+        }
+    }
+
+    private void onPlayMusic() {
+        if(mediaPlayer!=null && !isPlaying)
+        {
+            mediaPlayer.start();
+            isPlaying=true;
+        }
     }
 
     @Override
