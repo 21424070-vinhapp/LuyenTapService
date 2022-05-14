@@ -19,6 +19,7 @@ public class MyApplication extends Application {
             //TAO DOI TUONG NOTIFICATION
             NotificationChannel notificationChannel=new NotificationChannel(CHANNEL_ID,"Channel Service Example", NotificationManager.IMPORTANCE_DEFAULT);
             NotificationManager notificationManager= (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            notificationChannel.setSound(null,null);
             notificationManager.createNotificationChannel(notificationChannel);
         }
     }
