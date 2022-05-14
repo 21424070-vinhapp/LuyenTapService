@@ -6,6 +6,7 @@ import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 
@@ -23,13 +24,22 @@ public class MyService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         //nhan du lieu string tu intent
-        String getData=intent.getStringExtra("data_send");
-        sendNotification(getData);
+        //String getData=intent.getStringExtra("data_send");
+
+        //nhan object tu bundle Main
+        Bundle bundle=new Bundle();
+        bundle=intent.getExtras();
+        if(bundle!=null)
+        {
+            Song song= (Song) bundle.get("object_song");
+            sendNotification(song);
+        }
+
         Log.d("BBB", "onStartCommand: ");
        return START_NOT_STICKY;
     }
 
-    private void sendNotification(String getData) {
+    private void sendNotification(Song song) {
         Intent intent=new Intent(this,MainActivity.class);
         //xac dinh noi man hinh tra ve khi nhan vao notification
         PendingIntent pendingIntent=PendingIntent.getActivity(this,0,intent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -37,7 +47,7 @@ public class MyService extends Service {
 
         Notification notification=new NotificationCompat.Builder(this,CHANNEL_ID)
                 .setContentTitle("Tile example")
-                .setContentText(getData)
+                //.setContentText(getData)
                 .setSmallIcon(android.R.drawable.ic_media_play)
                 .setContentIntent(pendingIntent)
                 .build();
