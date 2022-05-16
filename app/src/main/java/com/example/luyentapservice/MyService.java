@@ -101,6 +101,7 @@ public class MyService extends Service {
         }
     }
 
+    //xu ly nut pause
     private void onPauseMusic() {
         if(mediaPlayer!=null && isPlaying)
         {
@@ -108,7 +109,7 @@ public class MyService extends Service {
             isPlaying=false;
         }
     }
-
+    //xu ly nut play
     private void onPlayMusic() {
         if(mediaPlayer!=null && !isPlaying)
         {
