@@ -34,32 +34,22 @@ public class MyService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        //nhan du lieu string tu intent
-        //String getData=intent.getStringExtra("data_send");
-
         //nhan object tu bundle Main
         Bundle bundle = intent.getExtras();
         if (bundle != null) {
             Song song = (Song) bundle.get("object_song");
-            mSong = song;
-            startMusic(song);
-            sendNotification(song);
+            if(song!=null)
+            {
+                mSong = song;
+                startMusic(song);
+                sendNotification(song);
+            }
         }
-
-        //Log.d("BBB", "onStartCommand: "+mSong);
-        //Log.d("BBB", "onStartCommand: ");
 
         //nhan action nhan tu broadcast receiver
-        if(intent.getIntExtra("action_music_service", 0)!=0)
-        {
-            int actionMusic = intent.getIntExtra("action_music_service", 0);
-            Log.d("BBB", "onStartCommand: " + actionMusic);
-            handleActionMusic(actionMusic);
-        }
+        int actionMusic = intent.getIntExtra("action_music2", 0);
+        handleActionMusic(actionMusic);
 
-
-
-        //Log.d("BBB", "onStartCommand: "+actionMusic);
 
         return START_NOT_STICKY;
     }

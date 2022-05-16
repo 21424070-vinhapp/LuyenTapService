@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private void clickStartService() {
         Intent intent=new Intent(this,MyService.class);
 
-        Song song=new Song("Nhac","Dong Nhi",R.drawable.ic_launcher_background,R.raw.baiso01);
+        Song song=new Song("Nhac","Dong Nhi",R.drawable.icons_stop_,R.raw.baiso01);
 
         //gui intent thong qua bundle
         Bundle bundle=new Bundle();

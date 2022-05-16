@@ -11,10 +11,10 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         int actionMusic=intent.getIntExtra("action_music",0);
-        Log.d("BBB", "onReceive: "+actionMusic);
+        //Log.d("BBB", "onReceive: "+actionMusic);
 
         Intent intentService=new Intent(context,MyService.class);
-        intentService.putExtra("action_music_service",actionMusic);
+        intentService.putExtra("action_music2",actionMusic);
 
         context.startService(intentService);
     }
