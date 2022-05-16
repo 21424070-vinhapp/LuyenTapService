@@ -8,13 +8,13 @@
         android:id="@+id/img_song"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:src="@mipmap/ic_launcher"
-        android:scaleType="center"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="20dp"/>
+        android:layout_marginLeft="20dp"
+        android:scaleType="center"
+        android:src="@mipmap/ic_launcher" />
 
     <LinearLayout
-        android:layout_toStartOf="@id/imgPause"
+        android:layout_toStartOf="@id/imgPlayOrPause"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@+id/img_song"
@@ -49,15 +49,15 @@
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="30dp"
-        android:src="@drawable/icons_cancel_"/>
+        android:src="@drawable/icons_cancel_" />
 
     <ImageView
-        android:id="@+id/imgPause"
+        android:id="@+id/imgPlayOrPause"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toStartOf="@id/imgCancel"
         android:layout_centerVertical="true"
         android:layout_marginRight="30dp"
-        android:src="@drawable/icons_stop_"/>
+        android:layout_toStartOf="@id/imgCancel"
+        android:src="@drawable/icons_stop_" />
 
 </RelativeLayout>

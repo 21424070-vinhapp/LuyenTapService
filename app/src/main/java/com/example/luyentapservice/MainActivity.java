@@ -45,11 +45,12 @@ public class MainActivity extends AppCompatActivity {
         Intent intent=new Intent(this,MyService.class);
 
         Song song=new Song("Nhac","Dong Nhi",R.drawable.ic_launcher_background,R.raw.baiso01);
+
         //gui intent thong qua bundle
         Bundle bundle=new Bundle();
         bundle.putSerializable("object_song",song);
-
         intent.putExtras(bundle);
+
         startService(intent);
     }
 

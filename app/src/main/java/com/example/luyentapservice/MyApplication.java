@@ -1,26 +1,27 @@
 package com.example.luyentapservice;
 
+
 import android.app.Application;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.os.Build;
 
 public class MyApplication extends Application {
-    public static final String CHANNEL_ID="My_Channel";
+public static final String CHANNEL_ID="channel_service_example";
     @Override
     public void onCreate() {
         super.onCreate();
-        createChanelNotification();
+
+        createApplicationChanel();
     }
 
-    private void createChanelNotification() {
+    private void createApplicationChanel() {
+        //KIEM TRA VERSION CUA MAY, O LA API 26
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
         {
-            //TAO DOI TUONG NOTIFICATION
-            NotificationChannel notificationChannel=new NotificationChannel(CHANNEL_ID,"Channel Service Example", NotificationManager.IMPORTANCE_DEFAULT);
-            NotificationManager notificationManager= (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-            //setsound = null de khong co tieng thong bao vang len khi play nhac
-            notificationChannel.setSound(null,null);
+            //TAO RA DOI TUONG NOTIFICATIONCHANNEL
+            NotificationChannel notificationChannel=new NotificationChannel(CHANNEL_ID, "My Channel example",NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager notificationManager=getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(notificationChannel);
         }
     }

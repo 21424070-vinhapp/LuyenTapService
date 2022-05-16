@@ -46,4 +46,14 @@ public class Song implements Serializable {
         this.image = image;
         this.resource = resource;
     }
+
+    @Override
+    public String toString() {
+        return "Song{" +
+                "title='" + title + '\'' +
+                ", single='" + single + '\'' +
+                ", image=" + image +
+                ", resource=" + resource +
+                '}';
+    }
 }
