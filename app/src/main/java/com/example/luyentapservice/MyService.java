@@ -16,12 +16,16 @@ import android.widget.RemoteViews;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationCompatSideChannelService;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 public class MyService extends Service {
+
 
     public static final int ACTION_PAUSE = 1;
     public static final int ACTION_RESUME = 2;
     public static final int ACTION_CLEAR = 3;
+    public static final int ACTION_START = 4;
+
     private boolean isPlaying;
     private MediaPlayer mediaPlayer;
     private Song mSong;
@@ -116,7 +120,10 @@ public class MyService extends Service {
                 break;
             case ACTION_CLEAR:
                 stopSelf();
+                sendActionActivity(ACTION_CLEAR);
                 break;
+
+
         }
     }
 
@@ -128,6 +135,7 @@ public class MyService extends Service {
         }
         mediaPlayer.start();
         isPlaying = true;
+        sendActionActivity(ACTION_START);
     }
 
 
@@ -137,6 +145,7 @@ public class MyService extends Service {
             mediaPlayer.pause();
             isPlaying = false;
             sendNotification(mSong);
+            sendActionActivity(ACTION_PAUSE);
         }
     }
 
@@ -146,6 +155,7 @@ public class MyService extends Service {
             mediaPlayer.start();
             isPlaying = true;
             sendNotification(mSong);
+            sendActionActivity(ACTION_RESUME);
         }
     }
 
@@ -163,5 +173,21 @@ public class MyService extends Service {
             mediaPlayer = null;
         }
         Log.d("BBB", "onDestroy: MyService");
+    }
+
+    private void sendActionActivity(int action)
+    {
+        Intent intent=new Intent("send_content_to_activity");
+        //dong goi bundle gom object song, trang thai isPlaying,
+        Bundle bundle=new Bundle();
+        bundle.putSerializable("object_song",mSong);
+        bundle.putBoolean("statusPlayer",isPlaying);
+        bundle.putInt("action_music",action);
+
+        intent.putExtras(bundle);
+
+        //gui intent thong qua broadcast receiver
+        //doi tuong su dung la local bradcast manager
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 }
